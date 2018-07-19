@@ -12,7 +12,7 @@
     "semantic-release": "semantic-release",
     "start": "micro",
     "dev": "micro-dev",
-    "debug": "node --inspect node_modules/.bin/micro-dev"
+    "dev:debug": "node --inspect node_modules/.bin/micro-dev"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/frontity/cloud#readme",
   "dependencies": {
+    "got": "^8.3.2",
     "micro": "^9.3.2"
   },
   "devDependencies": {
