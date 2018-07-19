@@ -1,0 +1,19 @@
+{
+  "name": "frontity-cloud",
+  "version": "1.0.0",
+  "description": "Micro service for frontity.cloud",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontity/cloud.git"
+  },
+  "author": "luis@frontity.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/frontity/cloud/issues"
+  },
+  "homepage": "https://github.com/frontity/cloud#readme"
+}
