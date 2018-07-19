@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 const { parse } = require('url');
 const got = require('got');
+const cors = require('micro-cors')();
 
-module.exports = async req => {
+module.exports = cors(async req => {
   const url = parse(req.url.replace('/', ''));
   if (/favicon/.test(url.href)) return '';
   const response = await got(url, {
@@ -13,4 +14,4 @@ module.exports = async req => {
   });
   console.log(response.req._header);
   return response.body;
-};
+});
