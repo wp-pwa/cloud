@@ -10,9 +10,9 @@
     "cz": "git-cz",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release",
-    "start": "micro",
-    "dev": "micro-dev",
-    "dev:debug": "node --inspect node_modules/.bin/micro-dev"
+    "start": "micro src/index.js",
+    "dev": "micro-dev src/index.js",
+    "dev:debug": "node --inspect node_modules/.bin/micro-dev src/index.js"
   },
   "repository": {
     "type": "git",
