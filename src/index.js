@@ -7,7 +7,7 @@ module.exports = cors(async (req, res) => {
   try {
     const url = parse(req.url.replace('/', ''));
     if (!url.protocol) throw new Error(`Invalid url: ${url.href}`);
-    const data = await got(url, {
+    const data = await got.get(url, {
       headers: {
         'User-Agent': req.headers['user-agent'],
         Host: url.host,
