@@ -3,13 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "description": "Micro service for frontity.cloud",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest --watch",
     "test:ci": "jest --silent --passWithNoTests",
     "cz": "git-cz",
     "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "start": "micro",
+    "dev": "micro-dev",
+    "debug": "node --inspect node_modules/.bin/micro-dev"
   },
   "repository": {
     "type": "git",
@@ -21,7 +24,9 @@
     "url": "https://github.com/frontity/cloud/issues"
   },
   "homepage": "https://github.com/frontity/cloud#readme",
-  "dependencies": {},
+  "dependencies": {
+    "micro": "^9.3.2"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
@@ -42,6 +47,7 @@
     "husky": "^1.0.0-rc.9",
     "jest": "^23.1.0",
     "lint-staged": "^7.2.0",
+    "micro-dev": "^3.0.0",
     "prettier": "^1.13.5",
     "semantic-release": "^15.5.5",
     "travis-deploy-once": "^5.0.0"
