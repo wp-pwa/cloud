@@ -1,18 +1,15 @@
-/* eslint-disable no-underscore-dangle */
 const { parse } = require('url');
 const got = require('got');
 const cors = require('micro-cors')();
 
 module.exports = cors(async (req, res) => {
   const url = parse(req.url.replace('/', ''));
-  if (/favicon/.test(url.href)) return '';
   const response = await got(url, {
     headers: {
       'User-Agent': req.headers['user-agent'],
-      host: url.host,
+      Host: url.host,
     },
   });
-  console.log(response.req._header);
   res.setHeader(
     'Cache-Control',
     'public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000',
