@@ -5,7 +5,11 @@
   "description": "Micro service for frontity.cloud",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:ci": "jest --silent --passWithNoTests",
+    "cz": "git-cz",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -16,5 +20,30 @@
   "bugs": {
     "url": "https://github.com/frontity/cloud/issues"
   },
-  "homepage": "https://github.com/frontity/cloud#readme"
+  "homepage": "https://github.com/frontity/cloud#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "@semantic-release/changelog": "^2.0.2",
+    "@semantic-release/git": "^5.0.0",
+    "@semantic-release/github": "^4.2.17",
+    "@semantic-release/npm": "^3.3.1",
+    "babel-eslint": "^8.2.3",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "husky": "^1.0.0-rc.9",
+    "jest": "^23.1.0",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.13.5",
+    "semantic-release": "^15.5.5",
+    "travis-deploy-once": "^5.0.0"
+  }
 }
