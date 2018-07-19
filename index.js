@@ -6,6 +6,7 @@ const { send, createError } = require('micro');
 module.exports = cors(async (req, res) => {
   try {
     const url = parse(req.url.replace('/', ''));
+    if (!url.protocol) throw new Error(`Invalid url: ${url.href}`);
     const data = await got(url, {
       headers: {
         'User-Agent': req.headers['user-agent'],
@@ -18,6 +19,6 @@ module.exports = cors(async (req, res) => {
     );
     send(res, 200, JSON.parse(data.body));
   } catch (error) {
-    throw createError(400, error);
+    throw createError(500, error);
   }
 });
