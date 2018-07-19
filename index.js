@@ -1,7 +1,7 @@
 const { parse } = require('url');
 const got = require('got');
 const cors = require('micro-cors')();
-const { send } = require('micro');
+const { send, createError } = require('micro');
 
 module.exports = cors(async (req, res) => {
   try {
@@ -16,8 +16,8 @@ module.exports = cors(async (req, res) => {
       'Cache-Control',
       'public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000',
     );
-    return send(res, 200, JSON.parse(data.body));
+    send(res, 200, JSON.parse(data.body));
   } catch (error) {
-    return send(res, 400, error);
+    throw createError(400, error);
   }
 });
