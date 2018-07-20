@@ -50,12 +50,24 @@ test('Should send the same User Agent than what is called with', async () => {
     .reply(200, { result: 'ok' });
   await got(`${url}/http://fake-domain.com/`, {
     headers: {
-      'User-Agent': 'My custom User Agent',
+      'user-agent': 'My custom User Agent',
     },
   });
   expect(got.get.mock.calls[1][1].headers['user-agent']).toBe(
     'My custom User Agent',
   );
+});
+
+test('Should send the same Host than what is called with', async () => {
+  nock('http://fake-domain.com')
+    .get('/')
+    .reply(200, { result: 'ok' });
+  await got(`${url}/http://fake-domain.com/`, {
+    headers: {
+      host: 'fake-domain.com',
+    },
+  });
+  expect(got.get.mock.calls[1][1].headers.host).toBe('fake-domain.com');
 });
 
 test('Should send cache-control header', async () => {
