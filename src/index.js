@@ -9,12 +9,12 @@ module.exports = cors(async (req, res) => {
     if (!url.protocol) throw new Error(`Invalid url: ${url.href}`);
     const data = await got.get(url, {
       headers: {
-        'User-Agent': req.headers['user-agent'],
-        Host: url.host,
+        'user-agent': req.headers['user-agent'],
+        host: url.host,
       },
     });
     res.setHeader(
-      'Cache-Control',
+      'cache-control',
       'public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000',
     );
     send(res, 200, JSON.parse(data.body));
