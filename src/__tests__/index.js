@@ -62,11 +62,7 @@ test('Should send cache-control header', async () => {
   nock('http://fake-domain.com')
     .get('/')
     .reply(200, { result: 'ok' });
-  const res = await got(`${url}/http://fake-domain.com/`, {
-    headers: {
-      'User-Agent': 'My custom User Agent',
-    },
-  });
+  const res = await got(`${url}/http://fake-domain.com/`);
   expect(res.headers['cache-control']).toMatchSnapshot();
 });
 
@@ -74,13 +70,20 @@ test('Should send CORS headers', async () => {
   nock('http://fake-domain.com')
     .get('/')
     .reply(200, { result: 'ok' });
-  const res = await got(`${url}/http://fake-domain.com/`, {
-    headers: {
-      'User-Agent': 'My custom User Agent',
-    },
-  });
+  const res = await got(`${url}/http://fake-domain.com/`);
   const headers = Object.keys(res.headers)
     .filter(header => /access-control-allow/.test(header))
     .reduce((obj, key) => ({ ...obj, [key]: res.headers[key] }), {});
   expect(headers).toMatchSnapshot();
+});
+
+test('Should send API response', async () => {
+  const apiResponse = { result: 'ok' };
+  nock('http://fake-domain.com')
+    .get('/api')
+    .reply(200, apiResponse);
+  const { body } = await got(`${url}/http://fake-domain.com/api`, {
+    json: true,
+  });
+  expect(body).toEqual(apiResponse);
 });
