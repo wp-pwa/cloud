@@ -53,12 +53,12 @@ test('Should send the same User Agent than what is called with', async () => {
       'User-Agent': 'My custom User Agent',
     },
   });
-  expect(got.get.mock.calls[1][1].headers['User-Agent']).toBe(
+  expect(got.get.mock.calls[1][1].headers['user-agent']).toBe(
     'My custom User Agent',
   );
 });
 
-test('Should send Cache-Control header', async () => {
+test('Should send cache-control header', async () => {
   nock('http://fake-domain.com')
     .get('/')
     .reply(200, { result: 'ok' });
@@ -68,4 +68,19 @@ test('Should send Cache-Control header', async () => {
     },
   });
   expect(res.headers['cache-control']).toMatchSnapshot();
+});
+
+test('Should send CORS headers', async () => {
+  nock('http://fake-domain.com')
+    .get('/')
+    .reply(200, { result: 'ok' });
+  const res = await got(`${url}/http://fake-domain.com/`, {
+    headers: {
+      'User-Agent': 'My custom User Agent',
+    },
+  });
+  const headers = Object.keys(res.headers)
+    .filter(header => /access-control-allow/.test(header))
+    .reduce((obj, key) => ({ ...obj, [key]: res.headers[key] }), {});
+  expect(headers).toMatchSnapshot();
 });
