@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should send Cache-Control header 1`] = `"public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000"`;

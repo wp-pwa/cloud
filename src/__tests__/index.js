@@ -57,3 +57,15 @@ test('Should send the same User Agent than what is called with', async () => {
     'My custom User Agent',
   );
 });
+
+test('Should send Cache-Control header', async () => {
+  nock('http://fake-domain.com')
+    .get('/')
+    .reply(200, { result: 'ok' });
+  const res = await got(`${url}/http://fake-domain.com/`, {
+    headers: {
+      'User-Agent': 'My custom User Agent',
+    },
+  });
+  expect(res.headers['cache-control']).toMatchSnapshot();
+});
