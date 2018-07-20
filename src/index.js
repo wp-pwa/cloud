@@ -20,6 +20,6 @@ module.exports = cors(async (req, res) => {
     );
     send(res, 200, data.body);
   } catch (error) {
-    throw createError(error.statusCode || 500, error);
+    throw createError(error.statusCode || 500, error.statusMessage || error);
   }
 });
