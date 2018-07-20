@@ -12,12 +12,13 @@ module.exports = cors(async (req, res) => {
         'user-agent': req.headers['user-agent'],
         host: url.host,
       },
+      json: true,
     });
     res.setHeader(
       'cache-control',
       'public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000',
     );
-    send(res, 200, JSON.parse(data.body));
+    send(res, 200, data.body);
   } catch (error) {
     throw createError(error.statusCode || 500, error);
   }
