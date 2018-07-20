@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest",
     "test:ci": "jest --silent --passWithNoTests",
     "cz": "git-cz",
     "travis-deploy-once": "travis-deploy-once",
