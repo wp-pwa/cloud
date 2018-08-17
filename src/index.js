@@ -18,6 +18,11 @@ module.exports = cors(async (req, res) => {
       'cache-control',
       'public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000',
     );
+    Object.keys(data.headers)
+      .filter(key => /x-wp/i.test(key))
+      .forEach(key => {
+        res.setHeader(key, data.headers[key]);
+      });
     send(res, 200, data.body);
   } catch (error) {
     throw createError(error.statusCode || 500, error.statusMessage || error);
