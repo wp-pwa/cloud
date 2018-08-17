@@ -99,3 +99,16 @@ test('Should send API response', async () => {
   });
   expect(body).toEqual(apiResponse);
 });
+
+test('Should send any x-wp header', async () => {
+  const apiResponse = { result: 'ok' };
+  nock('http://fake-domain.com')
+    .get('/api')
+    .reply(200, apiResponse, {
+      'x-wp-custom': 'value',
+    });
+  const { headers } = await got(`${url}/http://fake-domain.com/api`, {
+    json: true,
+  });
+  expect(headers['x-wp-custom']).toEqual('value');
+});
