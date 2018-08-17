@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/frontity/cloud/compare/v1.0.0...v1.0.1) (2018-08-17)
+
+
+### Bug Fixes
+
+* **headers:** allow wp headers to pass thru ([3a7ae2a](https://github.com/frontity/cloud/commit/3a7ae2a))
+
 # 1.0.0 (2018-07-20)
 
 
