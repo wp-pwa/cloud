@@ -2,18 +2,23 @@ const micro = require('micro');
 const nock = require('nock');
 const listen = require('test-listen');
 const got = require('got');
+const http = require('http');
+const { promisify } = require('util');
+const { readFile } = require('fs');
 const server = require('../');
 
 let url = null;
 let service = null;
 
+jest.spyOn(http, 'get');
+
 beforeEach(async () => {
-  jest.spyOn(got, 'get');
   service = micro(server);
   url = await listen(service);
 });
 
 afterEach(() => {
+  http.get.mockClear();
   service.close();
 });
 
@@ -53,7 +58,7 @@ test('Should send the same User Agent than what is called with', async () => {
       'user-agent': 'My custom User Agent',
     },
   });
-  expect(got.get.mock.calls[1][1].headers['user-agent']).toBe(
+  expect(http.get.mock.calls[0][0].headers['user-agent']).toBe(
     'My custom User Agent',
   );
 });
@@ -67,14 +72,29 @@ test('Should send the same Host than what is called with', async () => {
       host: 'fake-domain.com',
     },
   });
-  expect(got.get.mock.calls[1][1].headers.host).toBe('fake-domain.com');
+  expect(http.get.mock.calls[0][0].headers.host).toBe('fake-domain.com');
 });
 
-test('Should send cache-control header', async () => {
+test('Should send a short cache-control header if json or html', async () => {
   nock('http://fake-domain.com')
     .get('/')
-    .reply(200, { result: 'ok' });
-  const res = await got(`${url}/http://fake-domain.com/`);
+    .reply(200, '<html></html>', { 'Content-Type': 'text/html' });
+  const html = await got(`${url}/http://fake-domain.com/`);
+  nock('http://fake-domain.com')
+    .get('/api')
+    .reply(200, { result: 'ok' }, { 'Content-Type': 'application/json' });
+  const json = await got(`${url}/http://fake-domain.com/api`);
+  expect(html.headers['cache-control']).toBe(json.headers['cache-control']);
+  expect(html.headers['cache-control']).toMatchSnapshot();
+});
+
+test('Should send a long cache-control header if not json or html', async () => {
+  nock('http://fake-domain.com')
+    .get('/test-image.png')
+    .replyWithFile(200, `${__dirname}/test-image.png`, {
+      'Content-Type': 'image/png',
+    });
+  const res = await got(`${url}/http://fake-domain.com/test-image.png`);
   expect(res.headers['cache-control']).toMatchSnapshot();
 });
 
@@ -100,15 +120,27 @@ test('Should send API response', async () => {
   expect(body).toEqual(apiResponse);
 });
 
+test('Should send image response', async () => {
+  nock('http://fake-domain.com')
+    .get('/test-image.png')
+    .replyWithFile(200, `${__dirname}/test-image.png`, {
+      'Content-Type': 'image/png',
+    });
+  const res = await got(`${url}/http://fake-domain.com/test-image.png`);
+  const buffer = await promisify(readFile)(`${__dirname}/test-image.png`);
+  expect(res.body).toEqual(buffer.toString());
+});
+
 test('Should send any x-wp header', async () => {
-  const apiResponse = { result: 'ok' };
   nock('http://fake-domain.com')
     .get('/api')
-    .reply(200, apiResponse, {
-      'x-wp-custom': 'value',
-    });
-  const { headers } = await got(`${url}/http://fake-domain.com/api`, {
-    json: true,
-  });
+    .reply(
+      200,
+      { result: 'ok' },
+      {
+        'x-wp-custom': 'value',
+      },
+    );
+  const { headers } = await got(`${url}/http://fake-domain.com/api`);
   expect(headers['x-wp-custom']).toEqual('value');
 });
