@@ -2,7 +2,7 @@
   "name": "frontity-cloud",
   "version": "1.0.1",
   "private": true,
-  "description": "Micro service for frontity.cloud",
+  "description": "Micro service for cdn.frontity.cloud and cdn.frontity.media",
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
@@ -12,7 +12,7 @@
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release",
     "start": "micro src/index.js",
-    "dev": "micro-dev src/index.js",
+    "dev": "micro-dev src/index.js --watch src/",
     "dev:debug": "node --inspect node_modules/.bin/micro-dev src/index.js"
   },
   "repository": {
@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/frontity/cloud#readme",
   "dependencies": {
-    "got": "^8.3.2",
     "micro": "^9.3.2",
     "micro-cors": "^0.1.0"
   },
@@ -47,6 +46,7 @@
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
+    "got": "^8.3.2",
     "husky": "^1.0.0-rc.9",
     "jest": "^23.1.0",
     "lint-staged": "^7.2.0",
