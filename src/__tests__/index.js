@@ -144,3 +144,11 @@ test('Should send any x-wp header', async () => {
   const { headers } = await got(`${url}/http://fake-domain.com/api`);
   expect(headers['x-wp-custom']).toEqual('value');
 });
+
+test('Should send a rel canonical header', async () => {
+  nock('http://fake-domain.com')
+    .get('/api')
+    .reply(200, { result: 'ok' });
+  const { headers } = await got(`${url}/http://fake-domain.com/api`);
+  expect(headers.link).toEqual('<http://fake-domain.com/api>; rel="canonical"');
+});

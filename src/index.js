@@ -11,6 +11,7 @@ module.exports = cors(async (req, res) => {
     if (!protocol || !hostname) throw new Error(`Invalid url: ${url}`);
 
     res.setHeader('cache-control', 'public, max-age=31536000');
+    res.setHeader('link', `<${url}>; rel="canonical"`);
 
     const transport = protocol === 'https:' ? https : http;
     transport
