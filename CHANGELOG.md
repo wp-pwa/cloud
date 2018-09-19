@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/frontity/cloud/compare/v1.0.1...v1.1.0) (2018-09-19)
+
+
+### Features
+
+* **cloud:** merge with frontity/media code to maintain only one repo ([4993142](https://github.com/frontity/cloud/commit/4993142)), closes [#5](https://github.com/frontity/cloud/issues/5)
+* **headers:** add link canonical header ([b886975](https://github.com/frontity/cloud/commit/b886975))
+
 ## [1.0.1](https://github.com/frontity/cloud/compare/v1.0.0...v1.0.1) (2018-08-17)
 
 
