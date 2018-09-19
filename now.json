@@ -1,5 +1,6 @@
 {
   "alias": [
-    "origin.frontity.cloud"
+    "origin.frontity.cloud",
+    "cdn.frontity.media"
   ]
 }
