@@ -2,7 +2,7 @@ const micro = require('micro');
 const nock = require('nock');
 const listen = require('test-listen');
 const got = require('got');
-const http = require('http');
+const { http } = require('follow-redirects');
 const { promisify } = require('util');
 const { readFile } = require('fs');
 const server = require('../');
@@ -151,4 +151,38 @@ test('Should send a rel canonical header', async () => {
     .reply(200, { result: 'ok' });
   const { headers } = await got(`${url}/http://fake-domain.com/api`);
   expect(headers.link).toEqual('<http://fake-domain.com/api>; rel="canonical"');
+});
+
+test('Should resolve 301 redirects automatically ', async () => {
+  const response = { result: 'ok' };
+  nock('http://fake-domain.com')
+    .get('/old')
+    .reply(301, 'Moved permamently!', {
+      location: 'http://fake-domain.com/new',
+    });
+  nock('http://fake-domain.com')
+    .get('/new')
+    .reply(200, response);
+  const { body } = await got(`${url}/http://fake-domain.com/old`, {
+    json: true,
+    followRedirect: false,
+  });
+  expect(body).toEqual(response);
+});
+
+test('Should resolve 302 redirects automatically ', async () => {
+  const response = { result: 'ok' };
+  nock('http://fake-domain.com')
+    .get('/old')
+    .reply(302, 'Moved temporarily!', {
+      location: 'http://fake-domain.com/new',
+    });
+  nock('http://fake-domain.com')
+    .get('/new')
+    .reply(200, response);
+  const { body } = await got(`${url}/http://fake-domain.com/old`, {
+    json: true,
+    followRedirect: false,
+  });
+  expect(body).toEqual(response);
 });
