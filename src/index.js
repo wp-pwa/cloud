@@ -1,5 +1,4 @@
-const http = require('http');
-const https = require('https');
+const { http, https } = require('follow-redirects');
 const { parse } = require('url');
 const cors = require('micro-cors')();
 const { send, createError } = require('micro');

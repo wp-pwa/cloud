@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/frontity/cloud#readme",
   "dependencies": {
+    "follow-redirects": "^1.5.8",
     "micro": "^9.3.2",
     "micro-cors": "^0.1.0"
   },
