@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/frontity/cloud/compare/v1.1.1...v1.1.2) (2018-10-10)
+
+
+### Bug Fixes
+
+* **index:** set header 'Access-Control-Expose-Headers' ([3d79e00](https://github.com/frontity/cloud/commit/3d79e00))
+
 ## [1.1.1](https://github.com/frontity/cloud/compare/v1.1.0...v1.1.1) (2018-10-09)
 
 

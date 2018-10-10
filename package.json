@@ -1,6 +1,6 @@
 {
   "name": "frontity-cloud",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "description": "Micro service for cdn.frontity.cloud and cdn.frontity.media",
   "main": "index.js",
