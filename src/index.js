@@ -11,6 +11,7 @@ module.exports = cors(async (req, res) => {
 
     res.setHeader('cache-control', 'public, max-age=31536000');
     res.setHeader('link', `<${url}>; rel="canonical"`);
+    res.setHeader('Access-Control-Expose-Headers', '*');
 
     const transport = protocol === 'https:' ? https : http;
     transport
