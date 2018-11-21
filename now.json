@@ -1,6 +1,7 @@
 {
-  "alias": [
-    "origin.frontity.cloud",
-    "cdn.frontity.media"
-  ]
+  "version": 2,
+  "alias": ["origin.frontity.cloud", "cdn.frontity.media"],
+  "builds": [{ "src": "src/index.js", "use": "@now/node" }],
+  "routes": [{ "src": ".*", "dest": "/src/index.js" }]
 }
+

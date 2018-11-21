@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
 const { http, https } = require('follow-redirects');
 const { parse } = require('url');
 const cors = require('micro-cors')();
-const { send, createError } = require('micro');
+const { send, createError, sendError } = require('micro');
 
 module.exports = cors(async (req, res) => {
   try {
@@ -50,6 +51,10 @@ module.exports = cors(async (req, res) => {
         throw error;
       });
   } catch (error) {
-    throw createError(error.statusCode || 500, error.statusMessage || error);
+    return sendError(
+      req,
+      res,
+      createError(error.statusCode || 500, error.statusMessage || error),
+    );
   }
 });
