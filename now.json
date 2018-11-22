@@ -1,6 +1,12 @@
 {
-  "alias": [
-    "origin.frontity.cloud",
-    "cdn.frontity.media"
-  ]
+  "name": "frontity-cloud",
+  "version": 2,
+  "regions": ["all"],
+  "github": {
+    "autoAlias": false
+  },
+  "alias": ["origin.frontity.cloud", "cdn.frontity.media"],
+  "builds": [{ "src": "src/index.js", "use": "@now/node" }],
+  "routes": [{ "src": ".*", "dest": "/src/index.js" }]
 }
+

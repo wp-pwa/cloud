@@ -2,8 +2,8 @@
   "name": "frontity-cloud",
   "version": "1.1.2",
   "private": true,
-  "description": "Micro service for cdn.frontity.cloud and cdn.frontity.media",
-  "main": "index.js",
+  "description": "Microservice for cdn.frontity.cloud and cdn.frontity.media",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest --watch",
     "test:debug": "node --inspect-brk node_modules/.bin/jest",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frontity/cloud.git"
+    "url": "https://github.com/frontity/cloud.git"
   },
   "author": "luis@frontity.com",
   "license": "Apache-2.0",
