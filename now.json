@@ -6,6 +6,7 @@
     "autoAlias": false
   },
   "alias": ["origin.frontity.cloud", "cdn.frontity.media"],
-  "builds": [{ "src": "src/index.js", "use": "@now/node" }]
+  "builds": [{ "src": "src/index.js", "use": "@now/node" }],
+  "routes": [{ "src": "/.*", "dest": "/src/index.js" }]
 }
 
