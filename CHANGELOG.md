@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/frontity/cloud/compare/v1.1.2...v1.1.3) (2018-11-22)
+
+
+### Bug Fixes
+
+* **semantic-release:** fix repo url ([8d73821](https://github.com/frontity/cloud/commit/8d73821))
+
 ## [1.1.2](https://github.com/frontity/cloud/compare/v1.1.1...v1.1.2) (2018-10-10)
 
 
