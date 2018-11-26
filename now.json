@@ -4,8 +4,12 @@
   "alias": ["origin.frontity.cloud", "cdn.frontity.media"],
   "scale": {
     "bru1": {
-      "min": 1,
-      "max": 1
+      "min": 2,
+      "max": 10
+    },
+    "sfo1": {
+      "min": 2,
+      "max": 10
     }
   },
   "github": {
