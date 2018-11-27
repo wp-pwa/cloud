@@ -3,11 +3,17 @@ const { http, https } = require('follow-redirects');
 const { parse } = require('url');
 const cors = require('micro-cors')();
 const { send, createError, sendError } = require('micro');
+const { join } = require('path');
+const fs = require('fs');
 
 module.exports = cors(async (req, res) => {
   try {
     const url = req.url.replace('/', '');
     const { protocol, hostname, path } = parse(url);
+    if (path === 'robots.txt') {
+      const robots = fs.readFileSync(join(__dirname, '../robots.txt'), 'utf8');
+      return send(res, 200, robots);
+    }
     if (!protocol || !hostname) throw new Error(`Invalid url: ${url}`);
 
     res.setHeader('cache-control', 'public, max-age=31536000');
