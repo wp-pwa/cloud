@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/frontity/cloud/compare/v1.1.3...v1.1.4) (2018-11-27)
+
+
+### Bug Fixes
+
+* **robots:** adds robots.txt ([04f5310](https://github.com/frontity/cloud/commit/04f5310))
+
 ## [1.1.3](https://github.com/frontity/cloud/compare/v1.1.2...v1.1.3) (2018-11-22)
 
 
