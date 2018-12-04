@@ -28,7 +28,8 @@
   "dependencies": {
     "follow-redirects": "^1.5.8",
     "micro": "^9.3.2",
-    "micro-cors": "^0.1.0"
+    "micro-cors": "^0.1.0",
+    "micro-query": "^0.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",

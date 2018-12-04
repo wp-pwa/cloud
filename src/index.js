@@ -5,6 +5,8 @@ const cors = require('micro-cors')();
 const { send, createError, sendError } = require('micro');
 const { join } = require('path');
 const fs = require('fs');
+const parseQuery = require('micro-query');
+const { mergeOptions } = require('./helpers');
 
 module.exports = cors(async (req, res) => {
   try {
@@ -45,10 +47,16 @@ module.exports = cors(async (req, res) => {
               /content-type/i.test(key) &&
               /(html|json)/i.test(headers[key])
             ) {
-              res.setHeader(
-                'cache-control',
-                'public, max-age=0, s-maxage=180, stale-while-revalidate=31536000, stale-if-error=31536000',
-              );
+              // Get cache-control options from query
+              const custom = parseQuery(req)['cache-control'];
+              const base = {
+                public: '',
+                'max-age': 0,
+                's-maxage': 180,
+                'stale-while-revalidate': 31536000,
+                'stale-if-error': 31536000,
+              };
+              res.setHeader('cache-control', mergeOptions(base, custom));
             }
             res.setHeader(key, headers[key]);
           });
