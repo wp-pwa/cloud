@@ -186,3 +186,18 @@ test('Should resolve 302 redirects automatically ', async () => {
   });
   expect(body).toEqual(response);
 });
+
+test('Should send a custom cache-control header if specified', async () => {
+  nock('http://fake-domain.com')
+    .get('/api')
+    .query({
+      'cache-control': {
+        's-maxage': 666,
+      },
+    })
+    .reply(200, { result: 'ok' });
+  const res = await got(
+    `${url}/http://fake-domain.com/api?cache-control[s-maxage]=666`,
+  );
+  expect(res.headers['cache-control']).toMatchSnapshot();
+});
