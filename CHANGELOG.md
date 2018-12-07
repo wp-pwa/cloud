@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/frontity/cloud/compare/v1.1.4...v1.2.0) (2018-12-07)
+
+
+### Features
+
+* **cache-control:** get custom cache options from query ([22ab86b](https://github.com/frontity/cloud/commit/22ab86b))
+
 ## [1.1.4](https://github.com/frontity/cloud/compare/v1.1.3...v1.1.4) (2018-11-27)
 
 
